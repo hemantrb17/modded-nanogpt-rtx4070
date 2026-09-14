@@ -7,24 +7,172 @@ Config: mbs=4 (4096 tokens) | batch_size=65536 tokens | grad_accum_steps=16
 Validation tokens: 2097152
 Starting training...
 step:   0/3250 | val_loss:10.8258 | train_time:0.0s | step_avg:nanms | peak_vram:1043MB
-step:   1/3250 | train_time:38.6s | step_avg:38593.6ms | peak_vram:3073MB
-step:   2/3250 | train_time:40.6s | step_avg:20323.2ms | peak_vram:3840MB
-step:   3/3250 | train_time:42.7s | step_avg:14219.7ms | peak_vram:3840MB
-step:   4/3250 | train_time:44.7s | step_avg:11173.0ms | peak_vram:3840MB
-step:   5/3250 | train_time:46.7s | step_avg:9346.4ms | peak_vram:3840MB
-step:  10/3250 | train_time:56.9s | step_avg:5692.2ms | peak_vram:3840MB
-step:  20/3250 | train_time:77.2s | step_avg:3861.5ms | peak_vram:3840MB
-step:  30/3250 | train_time:97.7s | step_avg:3257.9ms | peak_vram:3840MB
-step:  40/3250 | train_time:122.1s | step_avg:3052.1ms | peak_vram:3840MB
-step:  50/3250 | train_time:175.4s | step_avg:3507.1ms | peak_vram:3840MB
-step:  60/3250 | train_time:196.5s | step_avg:3275.8ms | peak_vram:3840MB
-step:  70/3250 | train_time:226.2s | step_avg:3232.0ms | peak_vram:3840MB
-step:  80/3250 | train_time:291.4s | step_avg:3642.7ms | peak_vram:3840MB
-step:  90/3250 | train_time:354.4s | step_avg:3937.5ms | peak_vram:3840MB
-step: 100/3250 | train_time:418.9s | step_avg:4188.9ms | peak_vram:3840MB
-step: 110/3250 | train_time:481.4s | step_avg:4376.1ms | peak_vram:3840MB
-step: 120/3250 | train_time:545.8s | step_avg:4548.2ms | peak_vram:3840MB
-step: 125/3250 | val_loss:5.4178 | train_time:577.1s | step_avg:4616.5ms | peak_vram:3840MB
-step: 130/3250 | train_time:609.3s | step_avg:4687.1ms | peak_vram:3840MB
-step: 140/3250 | train_time:675.2s | step_avg:4823.0ms | peak_vram:3840MB
-step: 150/3250 | train_time:742.9s | step_avg:4952.8ms | peak_vram:3840MB
+step:   1/3250 | train_time:53.4s | step_avg:53420.0ms | peak_vram:3073MB
+step:   2/3250 | train_time:61.8s | step_avg:30886.1ms | peak_vram:3840MB
+step:   3/3250 | train_time:70.2s | step_avg:23386.0ms | peak_vram:3840MB
+step:   4/3250 | train_time:76.5s | step_avg:19117.7ms | peak_vram:3840MB
+step:   5/3250 | train_time:82.8s | step_avg:16558.4ms | peak_vram:3840MB
+step:  10/3250 | train_time:114.6s | step_avg:11458.4ms | peak_vram:3840MB
+step:  20/3250 | train_time:177.6s | step_avg:8877.7ms | peak_vram:3840MB
+step:  30/3250 | train_time:242.1s | step_avg:8070.3ms | peak_vram:3840MB
+step:  40/3250 | train_time:306.7s | step_avg:7667.2ms | peak_vram:3840MB
+step:  50/3250 | train_time:369.2s | step_avg:7383.9ms | peak_vram:3840MB
+step:  60/3250 | train_time:434.3s | step_avg:7238.6ms | peak_vram:3840MB
+step:  70/3250 | train_time:500.7s | step_avg:7152.5ms | peak_vram:3840MB
+step:  80/3250 | train_time:564.7s | step_avg:7058.5ms | peak_vram:3840MB
+step:  90/3250 | train_time:632.5s | step_avg:7028.1ms | peak_vram:3840MB
+step: 100/3250 | train_time:699.3s | step_avg:6993.0ms | peak_vram:3840MB
+step: 110/3250 | train_time:768.3s | step_avg:6984.3ms | peak_vram:3840MB
+step: 120/3250 | train_time:834.8s | step_avg:6956.5ms | peak_vram:3840MB
+step: 125/3250 | val_loss:5.4162 | train_time:870.9s | step_avg:6967.1ms | peak_vram:3840MB
+step: 130/3250 | train_time:904.9s | step_avg:6961.1ms | peak_vram:3840MB
+step: 140/3250 | train_time:972.7s | step_avg:6948.2ms | peak_vram:3840MB
+step: 150/3250 | train_time:1041.1s | step_avg:6940.8ms | peak_vram:3840MB
+step: 160/3250 | train_time:1108.4s | step_avg:6927.6ms | peak_vram:3840MB
+step: 170/3250 | train_time:1171.9s | step_avg:6893.4ms | peak_vram:3840MB
+step: 180/3250 | train_time:1235.5s | step_avg:6863.7ms | peak_vram:3840MB
+step: 190/3250 | train_time:1300.2s | step_avg:6843.4ms | peak_vram:3840MB
+step: 200/3250 | train_time:1362.9s | step_avg:6814.3ms | peak_vram:3840MB
+step: 210/3250 | train_time:1427.9s | step_avg:6799.4ms | peak_vram:3840MB
+step: 220/3250 | train_time:1492.7s | step_avg:6785.1ms | peak_vram:3840MB
+step: 230/3250 | train_time:1513.2s | step_avg:6579.1ms | peak_vram:3840MB
+step: 240/3250 | train_time:1533.6s | step_avg:6389.9ms | peak_vram:3840MB
+step: 250/3250 | train_time:1554.0s | step_avg:6216.0ms | peak_vram:3840MB
+step: 250/3250 | val_loss:4.9136 | train_time:1554.0s | step_avg:5464.9ms | peak_vram:3840MB
+step: 260/3250 | train_time:1574.5s | step_avg:6055.6ms | peak_vram:3840MB
+step: 270/3250 | train_time:1595.0s | step_avg:5907.2ms | peak_vram:3840MB
+step: 280/3250 | train_time:1615.5s | step_avg:5769.5ms | peak_vram:3840MB
+step: 290/3250 | train_time:1635.9s | step_avg:5640.9ms | peak_vram:3840MB
+step: 300/3250 | train_time:1656.4s | step_avg:5521.2ms | peak_vram:3840MB
+step: 310/3250 | train_time:1676.8s | step_avg:5409.1ms | peak_vram:3840MB
+step: 320/3250 | train_time:1697.3s | step_avg:5304.1ms | peak_vram:3840MB
+step: 330/3250 | train_time:1717.7s | step_avg:5205.2ms | peak_vram:3840MB
+step: 340/3250 | train_time:1738.1s | step_avg:5112.1ms | peak_vram:3840MB
+step: 350/3250 | train_time:1758.5s | step_avg:5024.4ms | peak_vram:3840MB
+step: 360/3250 | train_time:1779.0s | step_avg:4941.6ms | peak_vram:3840MB
+step: 370/3250 | train_time:1799.4s | step_avg:4863.2ms | peak_vram:3840MB
+step: 375/3250 | val_loss:4.6504 | train_time:1809.6s | step_avg:2045.1ms | peak_vram:3840MB
+step: 380/3250 | train_time:1819.9s | step_avg:4789.1ms | peak_vram:3840MB
+step: 390/3250 | train_time:1840.4s | step_avg:4718.9ms | peak_vram:3840MB
+step: 400/3250 | train_time:1860.9s | step_avg:4652.3ms | peak_vram:3840MB
+step: 410/3250 | train_time:1881.5s | step_avg:4589.1ms | peak_vram:3840MB
+step: 420/3250 | train_time:1902.2s | step_avg:4529.0ms | peak_vram:3840MB
+step: 430/3250 | train_time:1923.0s | step_avg:4472.1ms | peak_vram:3840MB
+step: 440/3250 | train_time:1943.7s | step_avg:4417.6ms | peak_vram:3840MB
+step: 450/3250 | train_time:1964.5s | step_avg:4365.7ms | peak_vram:3840MB
+step: 460/3250 | train_time:1985.3s | step_avg:4315.8ms | peak_vram:3840MB
+step: 470/3250 | train_time:2006.1s | step_avg:4268.3ms | peak_vram:3840MB
+step: 480/3250 | train_time:2026.9s | step_avg:4222.7ms | peak_vram:3840MB
+step: 490/3250 | train_time:2047.7s | step_avg:4179.1ms | peak_vram:3840MB
+step: 500/3250 | train_time:2068.5s | step_avg:4137.0ms | peak_vram:3840MB
+step: 500/3250 | val_loss:4.5153 | train_time:2068.5s | step_avg:2070.8ms | peak_vram:3840MB
+step: 510/3250 | train_time:2089.2s | step_avg:4096.6ms | peak_vram:3840MB
+step: 520/3250 | train_time:2110.2s | step_avg:4058.0ms | peak_vram:3840MB
+step: 530/3250 | train_time:2131.4s | step_avg:4021.5ms | peak_vram:3840MB
+step: 540/3250 | train_time:2152.7s | step_avg:3986.5ms | peak_vram:3840MB
+step: 550/3250 | train_time:2174.3s | step_avg:3953.2ms | peak_vram:3840MB
+step: 560/3250 | train_time:2195.8s | step_avg:3921.1ms | peak_vram:3840MB
+step: 570/3250 | train_time:2217.5s | step_avg:3890.3ms | peak_vram:3840MB
+step: 580/3250 | train_time:2239.2s | step_avg:3860.6ms | peak_vram:3840MB
+step: 590/3250 | train_time:2271.6s | step_avg:3850.2ms | peak_vram:3840MB
+step: 600/3250 | train_time:2293.1s | step_avg:3821.8ms | peak_vram:3840MB
+step: 610/3250 | train_time:2313.6s | step_avg:3792.7ms | peak_vram:3840MB
+step: 620/3250 | train_time:2334.3s | step_avg:3765.1ms | peak_vram:3840MB
+step: 625/3250 | val_loss:4.4363 | train_time:2344.9s | step_avg:2211.1ms | peak_vram:3840MB
+step: 630/3250 | train_time:2355.4s | step_avg:3738.8ms | peak_vram:3840MB
+step: 640/3250 | train_time:2376.6s | step_avg:3713.5ms | peak_vram:3840MB
+step: 650/3250 | train_time:2397.8s | step_avg:3688.9ms | peak_vram:3840MB
+step: 660/3250 | train_time:2418.9s | step_avg:3665.1ms | peak_vram:3840MB
+step: 670/3250 | train_time:2440.2s | step_avg:3642.1ms | peak_vram:3840MB
+step: 680/3250 | train_time:2461.4s | step_avg:3619.7ms | peak_vram:3840MB
+step: 690/3250 | train_time:2482.6s | step_avg:3597.9ms | peak_vram:3840MB
+step: 700/3250 | train_time:2503.7s | step_avg:3576.7ms | peak_vram:3840MB
+step: 710/3250 | train_time:2524.9s | step_avg:3556.2ms | peak_vram:3840MB
+step: 720/3250 | train_time:2546.2s | step_avg:3536.3ms | peak_vram:3840MB
+step: 730/3250 | train_time:2567.4s | step_avg:3517.0ms | peak_vram:3840MB
+step: 740/3250 | train_time:2588.6s | step_avg:3498.1ms | peak_vram:3840MB
+step: 750/3250 | train_time:2609.8s | step_avg:3479.8ms | peak_vram:3840MB
+step: 750/3250 | val_loss:4.3691 | train_time:2609.8s | step_avg:2119.8ms | peak_vram:3840MB
+step: 760/3250 | train_time:2631.0s | step_avg:3461.9ms | peak_vram:3840MB
+step: 770/3250 | train_time:2652.2s | step_avg:3444.4ms | peak_vram:3840MB
+step: 780/3250 | train_time:2673.4s | step_avg:3427.4ms | peak_vram:3840MB
+step: 790/3250 | train_time:2694.6s | step_avg:3410.9ms | peak_vram:3840MB
+step: 800/3250 | train_time:2715.9s | step_avg:3394.8ms | peak_vram:3840MB
+step: 810/3250 | train_time:2737.1s | step_avg:3379.1ms | peak_vram:3840MB
+step: 820/3250 | train_time:2758.3s | step_avg:3363.7ms | peak_vram:3840MB
+step: 830/3250 | train_time:2779.5s | step_avg:3348.8ms | peak_vram:3840MB
+step: 840/3250 | train_time:2800.8s | step_avg:3334.2ms | peak_vram:3840MB
+step: 850/3250 | train_time:2822.0s | step_avg:3320.0ms | peak_vram:3840MB
+step: 860/3250 | train_time:2843.3s | step_avg:3306.1ms | peak_vram:3840MB
+step: 870/3250 | train_time:2864.5s | step_avg:3292.6ms | peak_vram:3840MB
+step: 875/3250 | val_loss:4.3155 | train_time:2875.1s | step_avg:2122.4ms | peak_vram:3840MB
+step: 880/3250 | train_time:2885.7s | step_avg:3279.2ms | peak_vram:3840MB
+step: 890/3250 | train_time:2907.0s | step_avg:3266.3ms | peak_vram:3840MB
+step: 900/3250 | train_time:2928.2s | step_avg:3253.6ms | peak_vram:3840MB
+step: 910/3250 | train_time:2949.5s | step_avg:3241.2ms | peak_vram:3840MB
+step: 920/3250 | train_time:2970.8s | step_avg:3229.1ms | peak_vram:3840MB
+step: 930/3250 | train_time:2992.0s | step_avg:3217.2ms | peak_vram:3840MB
+step: 940/3250 | train_time:3013.2s | step_avg:3205.6ms | peak_vram:3840MB
+step: 950/3250 | train_time:3034.5s | step_avg:3194.2ms | peak_vram:3840MB
+step: 960/3250 | train_time:3055.7s | step_avg:3183.0ms | peak_vram:3840MB
+step: 970/3250 | train_time:3076.9s | step_avg:3172.1ms | peak_vram:3840MB
+step: 980/3250 | train_time:3098.2s | step_avg:3161.4ms | peak_vram:3840MB
+step: 990/3250 | train_time:3119.5s | step_avg:3151.0ms | peak_vram:3840MB
+step:1000/3250 | train_time:3140.7s | step_avg:3140.7ms | peak_vram:3840MB
+step:1000/3250 | val_loss:4.2701 | train_time:3140.7s | step_avg:2124.7ms | peak_vram:3840MB
+step:1010/3250 | train_time:3161.9s | step_avg:3130.6ms | peak_vram:3840MB
+step:1020/3250 | train_time:3183.2s | step_avg:3120.8ms | peak_vram:3840MB
+step:1030/3250 | train_time:3204.5s | step_avg:3111.1ms | peak_vram:3840MB
+step:1040/3250 | train_time:3225.7s | step_avg:3101.6ms | peak_vram:3840MB
+step:1050/3250 | train_time:3246.9s | step_avg:3092.3ms | peak_vram:3840MB
+step:1060/3250 | train_time:3268.1s | step_avg:3083.1ms | peak_vram:3840MB
+step:1070/3250 | train_time:3289.3s | step_avg:3074.1ms | peak_vram:3840MB
+step:1080/3250 | train_time:3310.5s | step_avg:3065.3ms | peak_vram:3840MB
+step:1090/3250 | train_time:3331.7s | step_avg:3056.6ms | peak_vram:3840MB
+step:1100/3250 | train_time:3353.0s | step_avg:3048.2ms | peak_vram:3840MB
+step:1110/3250 | train_time:3374.1s | step_avg:3039.7ms | peak_vram:3840MB
+step:1120/3250 | train_time:3395.3s | step_avg:3031.5ms | peak_vram:3840MB
+step:1125/3250 | val_loss:4.2281 | train_time:3405.9s | step_avg:2121.1ms | peak_vram:3840MB
+step:1130/3250 | train_time:3416.5s | step_avg:3023.4ms | peak_vram:3840MB
+step:1140/3250 | train_time:3437.7s | step_avg:3015.5ms | peak_vram:3840MB
+step:1150/3250 | train_time:3458.9s | step_avg:3007.8ms | peak_vram:3840MB
+step:1160/3250 | train_time:3480.2s | step_avg:3000.2ms | peak_vram:3840MB
+step:1170/3250 | train_time:3501.4s | step_avg:2992.6ms | peak_vram:3840MB
+step:1180/3250 | train_time:3522.6s | step_avg:2985.3ms | peak_vram:3840MB
+step:1190/3250 | train_time:3544.0s | step_avg:2978.1ms | peak_vram:3840MB
+step:1200/3250 | train_time:3565.2s | step_avg:2971.0ms | peak_vram:3840MB
+step:1210/3250 | train_time:3586.5s | step_avg:2964.1ms | peak_vram:3840MB
+step:1220/3250 | train_time:3607.8s | step_avg:2957.2ms | peak_vram:3840MB
+step:1230/3250 | train_time:3629.1s | step_avg:2950.5ms | peak_vram:3840MB
+step:1240/3250 | train_time:3650.4s | step_avg:2943.9ms | peak_vram:3840MB
+step:1250/3250 | train_time:3671.7s | step_avg:2937.4ms | peak_vram:3840MB
+step:1250/3250 | val_loss:4.1935 | train_time:3671.8s | step_avg:2127.2ms | peak_vram:3840MB
+step:1260/3250 | train_time:3693.1s | step_avg:2931.0ms | peak_vram:3840MB
+step:1270/3250 | train_time:3714.4s | step_avg:2924.7ms | peak_vram:3840MB
+step:1280/3250 | train_time:3735.6s | step_avg:2918.5ms | peak_vram:3840MB
+step:1290/3250 | train_time:3756.9s | step_avg:2912.4ms | peak_vram:3840MB
+step:1300/3250 | train_time:3778.3s | step_avg:2906.4ms | peak_vram:3840MB
+step:1310/3250 | train_time:3799.5s | step_avg:2900.4ms | peak_vram:3840MB
+step:1320/3250 | train_time:3820.8s | step_avg:2894.6ms | peak_vram:3840MB
+step:1330/3250 | train_time:3842.2s | step_avg:2888.8ms | peak_vram:3840MB
+step:1340/3250 | train_time:3863.4s | step_avg:2883.1ms | peak_vram:3840MB
+step:1350/3250 | train_time:3884.7s | step_avg:2877.5ms | peak_vram:3840MB
+step:1360/3250 | train_time:3905.9s | step_avg:2872.0ms | peak_vram:3840MB
+step:1370/3250 | train_time:3927.3s | step_avg:2866.6ms | peak_vram:3840MB
+step:1375/3250 | val_loss:4.1672 | train_time:3937.9s | step_avg:2129.5ms | peak_vram:3840MB
+step:1380/3250 | train_time:3948.6s | step_avg:2861.3ms | peak_vram:3840MB
+step:1390/3250 | train_time:3969.9s | step_avg:2856.1ms | peak_vram:3840MB
+step:1400/3250 | train_time:3991.4s | step_avg:2851.0ms | peak_vram:3840MB
+step:1410/3250 | train_time:4012.7s | step_avg:2845.9ms | peak_vram:3840MB
+step:1420/3250 | train_time:4034.1s | step_avg:2840.9ms | peak_vram:3840MB
+step:1430/3250 | train_time:4055.4s | step_avg:2835.9ms | peak_vram:3840MB
+step:1440/3250 | train_time:4076.7s | step_avg:2831.0ms | peak_vram:3840MB
+step:1450/3250 | train_time:4098.1s | step_avg:2826.3ms | peak_vram:3840MB
+step:1460/3250 | train_time:4119.5s | step_avg:2821.6ms | peak_vram:3840MB
+step:1470/3250 | train_time:4140.9s | step_avg:2816.9ms | peak_vram:3840MB
+step:1480/3250 | train_time:4162.3s | step_avg:2812.4ms | peak_vram:3840MB
+step:1490/3250 | train_time:4183.7s | step_avg:2807.9ms | peak_vram:3840MB
+step:1500/3250 | train_time:4205.1s | step_avg:2803.4ms | peak_vram:3840MB
+step:1500/3250 | val_loss:4.1217 | train_time:4205.1s | step_avg:2137.2ms | peak_vram:3840MB
+step:1510/3250 | train_time:4226.4s | step_avg:2798.9ms | peak_vram:3840MB
+step:1520/3250 | train_time:4247.8s | step_avg:2794.6ms | peak_vram:3840MB

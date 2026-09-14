@@ -27,18 +27,29 @@ This directory documents the adaptation and training results of [KellerJordan/mo
    - Muon with pure PyTorch Newton-Schulz orthogonalization + fused AdamW.
 4. **Single-GPU Execution**:
    - Launched with `torchrun --standalone --nproc_per_node=1`.
+5. **Multi-Epoch Support**:
+   - Uses `itertools.cycle` to seamlessly cycle through training data shards for multi-epoch training.
 
 ---
 
 ## Training Results
 
-See [`training_log.txt`](./training_log.txt) for the full raw training output.
+See [`training_log.txt`](./training_log.txt) for the full raw training output across 1,520 steps (~100 Million tokens).
 
-* **Initial Validation Loss**: `10.8258`
-* **Step 125 Validation Loss**: `5.4178` (in ~9.5 minutes)
-* **Average Step Time**: ~3.3 – 4.5 seconds per step
-* **Token Throughput**: ~15,000 – 19,500 tokens / second
-* **Peak VRAM**: 3,840 MB
+| Step | Validation Loss | Perplexity ($e^{\text{loss}}$) | Train Time | Peak VRAM |
+| :---: | :---: | :---: | :---: | :---: |
+| **0** | **10.8258** | ~50,300 | 0.0s | 1,043 MB |
+| **125** | **5.4162** | ~225.0 | 870.9s | 3,840 MB |
+| **250** | **4.9136** | ~136.1 | 1,554.0s | 3,840 MB |
+| **500** | **4.5153** | ~91.4 | 2,068.5s | 3,840 MB |
+| **750** | **4.3691** | ~78.9 | 2,609.8s | 3,840 MB |
+| **1000** | **4.2701** | ~71.5 | 3,140.7s | 3,840 MB |
+| **1250** | **4.1935** | ~66.2 | 3,671.8s | 3,840 MB |
+| **1500** | **4.1217** | ~61.6 | 4,205.1s | 3,840 MB |
+
+* **Step Speed**: ~2.0 – 2.1 seconds per step (after single-container isolation).
+* **Token Throughput**: ~31,000 tokens / second.
+* **Peak VRAM**: 3,840 MB (consistent throughout the entire run).
 
 ---
 

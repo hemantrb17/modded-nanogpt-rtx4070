@@ -41,6 +41,8 @@ def _load_data_shard(file: Path):
         assert nbytes == 2 * num_tokens, "number of tokens read does not match header"
     return tokens
 
+import itertools
+
 def distributed_data_generator(filename_pattern: str, batch_size: int, seq_len: int = 1024):
     files = sorted(Path.cwd().glob(filename_pattern))
     if not files:
@@ -49,7 +51,7 @@ def distributed_data_generator(filename_pattern: str, batch_size: int, seq_len: 
     rank = dist.get_rank() if dist.is_initialized() else 0
     assert batch_size % world_size == 0
     local_batch_size = batch_size // world_size
-    file_iter = iter(files)
+    file_iter = itertools.cycle(files) # Seamless multi-epoch cycling across available shards
     tokens, pos = _load_data_shard(next(file_iter)), 0
     while True:
         if pos + batch_size + 1 >= len(tokens):
