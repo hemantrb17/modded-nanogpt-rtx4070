@@ -261,9 +261,18 @@ def main():
 
     # Prepare model
     model = GPT(vocab_size=50304, num_layers=12, model_dim=768).cuda()
-    model = torch.compile(model, dynamic=False)
 
-    # Initialize weights
+    # Checkpoint configuration
+    checkpoint_dir = Path("checkpoints")
+    checkpoint_dir.mkdir(exist_ok=True)
+    latest_ckpt_path = checkpoint_dir / "checkpoint_latest.pt"
+    best_ckpt_path = checkpoint_dir / "checkpoint_best.pt"
+
+    start_step = 0
+    best_val_loss = float("inf")
+    training_time = 0.0
+
+    # Initialize weights default
     for name, p in model.named_parameters():
         w = p.data
         if name.endswith("weight"):
@@ -278,6 +287,23 @@ def main():
         elif name.endswith("gains"):
             w.normal_(mean=1, std=0)
 
+    # Resume weights if checkpoint exists
+    resumed = False
+    if latest_ckpt_path.exists():
+        try:
+            print0(f"Found checkpoint at {latest_ckpt_path}. Resuming training...")
+            ckpt = torch.load(latest_ckpt_path, map_location="cuda")
+            model.load_state_dict(ckpt["model"])
+            start_step = ckpt["step"] + 1
+            best_val_loss = ckpt.get("best_val_loss", ckpt.get("val_loss", float("inf")))
+            training_time = ckpt.get("training_time", 0.0)
+            resumed = True
+            print0(f"Resumed from step {start_step} (previous val loss: {ckpt.get('val_loss', 'N/A')}, elapsed time: {training_time:.1f}s)")
+        except Exception as e:
+            print0(f"Warning: Failed to load checkpoint: {e}. Starting fresh.")
+
+    model = torch.compile(model, dynamic=False)
+
     # Create optimizers
     optimizer1 = AdamW([
         dict(params=[model.embed.weight], lr=0.7),
@@ -288,6 +314,15 @@ def main():
     optimizer2 = Muon([p for p in model.blocks.parameters() if p.ndim >= 2],
                       lr=0.025, weight_decay=0.05)
     optimizers = [optimizer1, optimizer2]
+
+    # Restore optimizer states if resuming
+    if resumed and "optimizer1" in ckpt and "optimizer2" in ckpt:
+        try:
+            optimizer1.load_state_dict(ckpt["optimizer1"])
+            optimizer2.load_state_dict(ckpt["optimizer2"])
+            print0("Restored optimizer states successfully.")
+        except Exception as e:
+            print0(f"Warning: Could not restore optimizer states: {e}")
 
     for opt in optimizers:
         for group in opt.param_groups:
@@ -312,15 +347,14 @@ def main():
 
     print0("Starting training...")
     t0 = time.perf_counter()
-    training_time = 0
-    last_val_step = 0
+    last_val_step = start_step
 
-    for step in range(train_steps + 1):
+    for step in range(start_step, train_steps + 1):
         # Validation
         val_step_freq = 125 if step / train_steps < 0.9 else 25
-        if step == train_steps or step % val_step_freq == 0:
+        if step == train_steps or (step % val_step_freq == 0 and step > start_step) or (step == 0 and not resumed):
             time_since_last_val = time.perf_counter() - t0
-            step_avg = time_since_last_val / max(step - last_val_step, 1) if step > 0 else float("nan")
+            step_avg = time_since_last_val / max(step - last_val_step, 1) if step > start_step else float("nan")
             last_val_step = step
             training_time += time_since_last_val
 
@@ -336,6 +370,34 @@ def main():
             val_loss /= (num_val_batches * tokens_per_microbatch)
             peak_vram_mb = torch.cuda.max_memory_allocated() // (1024 * 1024)
             print0(f"step:{step:4d}/{train_steps} | val_loss:{val_loss:.4f} | train_time:{training_time:.1f}s | step_avg:{1000*step_avg:.1f}ms | peak_vram:{peak_vram_mb}MB")
+
+            # Checkpoint management
+            if step > 0:
+                raw_model = model._orig_mod if hasattr(model, "_orig_mod") else model
+                ckpt_data = {
+                    "step": step,
+                    "model": raw_model.state_dict(),
+                    "optimizer1": optimizer1.state_dict(),
+                    "optimizer2": optimizer2.state_dict(),
+                    "val_loss": val_loss,
+                    "best_val_loss": min(val_loss, best_val_loss),
+                    "training_time": training_time,
+                }
+                # 1. Always save latest checkpoint for resume
+                torch.save(ckpt_data, latest_ckpt_path)
+
+                # 2. Save best checkpoint if new all-time low
+                if val_loss < best_val_loss:
+                    best_val_loss = val_loss
+                    torch.save(ckpt_data, best_ckpt_path)
+                    print0(f"🏆 New best validation loss: {best_val_loss:.4f}! Saved to {best_ckpt_path}")
+
+                # 3. Save milestone checkpoints every 1000 steps
+                if step % 1000 == 0:
+                    milestone_path = checkpoint_dir / f"checkpoint_step_{step:04d}.pt"
+                    torch.save(ckpt_data, milestone_path)
+                    print0(f"Saved milestone checkpoint to {milestone_path}")
+
             model.train()
             t0 = time.perf_counter()
 
@@ -363,6 +425,11 @@ def main():
 
     print0("=" * 80)
     print0("Training complete!")
+    if step > 0:
+        raw_model = model._orig_mod if hasattr(model, "_orig_mod") else model
+        final_path = checkpoint_dir / "final_model.pt"
+        torch.save({"step": step, "model": raw_model.state_dict(), "val_loss": val_loss}, final_path)
+        print0(f"Final model weights saved to {final_path}")
     print0(f"Final peak memory allocated: {torch.cuda.max_memory_allocated() // (1024 * 1024)} MiB")
     print0("=" * 80)
 
