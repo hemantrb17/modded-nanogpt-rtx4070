@@ -1,0 +1,30 @@
+================================================================================
+Modded-NanoGPT (RTX 4070 Laptop 8GB Optimized)
+PyTorch: 2.15.0.dev20260907+cu126 | CUDA: 12.6
+Device: NVIDIA GeForce RTX 4070 Laptop GPU | VRAM: 8.00 GB
+================================================================================
+Config: mbs=4 (4096 tokens) | batch_size=65536 tokens | grad_accum_steps=16
+Validation tokens: 2097152
+Starting training...
+step:   0/3250 | val_loss:10.8258 | train_time:0.0s | step_avg:nanms | peak_vram:1043MB
+step:   1/3250 | train_time:38.6s | step_avg:38593.6ms | peak_vram:3073MB
+step:   2/3250 | train_time:40.6s | step_avg:20323.2ms | peak_vram:3840MB
+step:   3/3250 | train_time:42.7s | step_avg:14219.7ms | peak_vram:3840MB
+step:   4/3250 | train_time:44.7s | step_avg:11173.0ms | peak_vram:3840MB
+step:   5/3250 | train_time:46.7s | step_avg:9346.4ms | peak_vram:3840MB
+step:  10/3250 | train_time:56.9s | step_avg:5692.2ms | peak_vram:3840MB
+step:  20/3250 | train_time:77.2s | step_avg:3861.5ms | peak_vram:3840MB
+step:  30/3250 | train_time:97.7s | step_avg:3257.9ms | peak_vram:3840MB
+step:  40/3250 | train_time:122.1s | step_avg:3052.1ms | peak_vram:3840MB
+step:  50/3250 | train_time:175.4s | step_avg:3507.1ms | peak_vram:3840MB
+step:  60/3250 | train_time:196.5s | step_avg:3275.8ms | peak_vram:3840MB
+step:  70/3250 | train_time:226.2s | step_avg:3232.0ms | peak_vram:3840MB
+step:  80/3250 | train_time:291.4s | step_avg:3642.7ms | peak_vram:3840MB
+step:  90/3250 | train_time:354.4s | step_avg:3937.5ms | peak_vram:3840MB
+step: 100/3250 | train_time:418.9s | step_avg:4188.9ms | peak_vram:3840MB
+step: 110/3250 | train_time:481.4s | step_avg:4376.1ms | peak_vram:3840MB
+step: 120/3250 | train_time:545.8s | step_avg:4548.2ms | peak_vram:3840MB
+step: 125/3250 | val_loss:5.4178 | train_time:577.1s | step_avg:4616.5ms | peak_vram:3840MB
+step: 130/3250 | train_time:609.3s | step_avg:4687.1ms | peak_vram:3840MB
+step: 140/3250 | train_time:675.2s | step_avg:4823.0ms | peak_vram:3840MB
+step: 150/3250 | train_time:742.9s | step_avg:4952.8ms | peak_vram:3840MB
