@@ -43,6 +43,38 @@ def _load_data_shard(file: Path):
 
 import itertools
 
+def ensure_dataset(data_dir: Path, min_train_shards: int = 4, rank: int = 0, print_fn=print):
+    """
+    Pre-flight check: Verifies validation and training shards exist.
+    If missing, automatically downloads them via huggingface_hub before training begins.
+    """
+    if rank == 0:
+        data_dir.mkdir(parents=True, exist_ok=True)
+        from huggingface_hub import hf_hub_download
+
+        # 1. Validation shard
+        val_path = data_dir / "fineweb_val_000000.bin"
+        if not val_path.exists():
+            print_fn(f"[Dataset] Validation shard missing. Downloading fineweb_val_000000.bin...")
+            hf_hub_download(repo_id="kjj0/fineweb10B-gpt2", filename="fineweb_val_000000.bin",
+                            repo_type="dataset", local_dir=str(data_dir))
+
+        # 2. Minimum required training shards
+        existing_train_shards = sorted(data_dir.glob("fineweb_train_*.bin"))
+        if len(existing_train_shards) < min_train_shards:
+            print_fn(f"[Dataset] Found {len(existing_train_shards)} train shard(s). Ensuring at least {min_train_shards} shards are present...")
+            for i in range(1, min_train_shards + 1):
+                fname = f"fineweb_train_{i:06d}.bin"
+                fpath = data_dir / fname
+                if not fpath.exists():
+                    print_fn(f"[Dataset] Downloading missing shard: {fname}...")
+                    hf_hub_download(repo_id="kjj0/fineweb10B-gpt2", filename=fname,
+                                    repo_type="dataset", local_dir=str(data_dir))
+            print_fn(f"[Dataset] All {min_train_shards} required shards are ready.")
+
+    if dist.is_initialized() and dist.get_world_size() > 1:
+        dist.barrier()
+
 def distributed_data_generator(filename_pattern: str, batch_size: int, seq_len: int = 1024):
     files = sorted(Path.cwd().glob(filename_pattern))
     if not files:
@@ -258,6 +290,9 @@ def main():
     assert grad_accum_steps >= 1, "batch_size must be >= mbs * seq_len * world_size"
 
     print0(f"Config: mbs={mbs} ({tokens_per_microbatch} tokens) | batch_size={batch_size} tokens | grad_accum_steps={grad_accum_steps}")
+
+    # Ensure minimum required dataset shards are downloaded
+    ensure_dataset(Path("data/fineweb10B"), min_train_shards=4, rank=rank, print_fn=print0)
 
     # Prepare model
     model = GPT(vocab_size=50304, num_layers=12, model_dim=768).cuda()

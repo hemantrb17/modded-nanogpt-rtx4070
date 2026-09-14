@@ -11,10 +11,10 @@ else
     echo "Docker image 'modded-nanogpt' is ready."
 fi
 
-# 2. Download Shard 1 if needed
-if [ ! -f "data/fineweb10B/fineweb_train_000001.bin" ]; then
-    echo "Downloading FineWeb Shard 1 (~200MB)..."
-    docker run --gpus all --ipc=host --rm -v "$(pwd):/modded-nanogpt" -w /modded-nanogpt modded-nanogpt python data/cached_fineweb10B.py 1
+# 2. Download at least 4 shards (~800MB) if not present
+if [ ! -f "data/fineweb10B/fineweb_train_000004.bin" ]; then
+    echo "Ensuring at least 4 FineWeb training shards are available..."
+    docker run --gpus all --ipc=host --rm -v "$(pwd):/modded-nanogpt" -w /modded-nanogpt modded-nanogpt python data/cached_fineweb10B.py 4
 fi
 
 # 3. Run training

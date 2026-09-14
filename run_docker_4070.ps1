@@ -12,10 +12,10 @@ if (-not $imageExists) {
     Write-Host "Docker image 'modded-nanogpt' is ready." -ForegroundColor Green
 }
 
-# 2. Download initial shard 1 if not present
-if (-not (Test-Path "data/fineweb10B/fineweb_train_000001.bin")) {
-    Write-Host "Downloading FineWeb Shard 1 (~200MB)..." -ForegroundColor Yellow
-    docker run --gpus all --ipc=host --rm -v "${PWD}:/modded-nanogpt" -w /modded-nanogpt modded-nanogpt python data/cached_fineweb10B.py 1
+# 2. Download at least 4 shards (~800MB) if not present
+if (-not (Test-Path "data/fineweb10B/fineweb_train_000004.bin")) {
+    Write-Host "Ensuring at least 4 FineWeb training shards are available..." -ForegroundColor Yellow
+    docker run --gpus all --ipc=host --rm -v "${PWD}:/modded-nanogpt" -w /modded-nanogpt modded-nanogpt python data/cached_fineweb10B.py 4
 }
 
 # 3. Launch training
