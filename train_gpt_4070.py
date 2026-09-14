@@ -363,10 +363,27 @@ def main():
         for group in opt.param_groups:
             group["initial_lr"] = group["lr"]
 
-    train_steps = 3250
+    train_steps = 6000
+    resume_from_step = start_step if resumed else 0
+
     def set_hparams(step: int, cooldown_frac: float = 0.7):
-        progress = step / train_steps
-        eta = 1.0 if progress < 1 - cooldown_frac else (1 - progress) / cooldown_frac
+        if resumed and resume_from_step > 0:
+            # Smooth continuation schedule from resume_from_step to train_steps
+            total_continuation_steps = train_steps - resume_from_step
+            curr_continuation_step = step - resume_from_step
+            warmup_steps = min(50, max(total_continuation_steps // 10, 10))
+            if curr_continuation_step < warmup_steps:
+                # 50-step gentle warmup from 0.05 to 0.35 of initial LR
+                eta = 0.05 + 0.30 * (curr_continuation_step / max(warmup_steps, 1))
+            else:
+                # Cosine decay from 0.35 down to 0.0 for smooth convergence
+                decay_progress = (curr_continuation_step - warmup_steps) / max(total_continuation_steps - warmup_steps, 1)
+                decay_progress = min(max(decay_progress, 0.0), 1.0)
+                eta = 0.35 * 0.5 * (1.0 + math.cos(math.pi * decay_progress))
+        else:
+            progress = step / train_steps
+            eta = 1.0 if progress < 1 - cooldown_frac else (1 - progress) / cooldown_frac
+
         for opt in optimizers:
             for group in opt.param_groups:
                 group["lr"] = group["initial_lr"] * eta
@@ -387,7 +404,7 @@ def main():
     for step in range(start_step, train_steps + 1):
         # Validation
         val_step_freq = 125 if step / train_steps < 0.9 else 25
-        if step == train_steps or (step % val_step_freq == 0 and step > start_step) or (step == 0 and not resumed):
+        if step == train_steps or (step % val_step_freq == 0 and step > start_step) or (step == 0 and not resumed) or (step == start_step and resumed):
             time_since_last_val = time.perf_counter() - t0
             step_avg = time_since_last_val / max(step - last_val_step, 1) if step > start_step else float("nan")
             last_val_step = step
